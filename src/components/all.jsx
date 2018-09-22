@@ -16,8 +16,8 @@ class All extends Component {
     const { todos } = this.props;
     const rows = todos.map(todo => (
       <tr key={todo.id}>
-        <td>{todo.status ? todo.name : <del>{todo.name}</del>}</td>
-        <td>{todo.status ? todo.date : <del>{todo.date}</del>}</td>
+        <td>{!todo.status ? todo.name : <del>{todo.name}</del>}</td>
+        <td>{!todo.status ? todo.date : <del>{todo.date}</del>}</td>
         <td>
           <button
             onClick={e => {

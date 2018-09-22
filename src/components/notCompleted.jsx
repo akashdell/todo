@@ -14,7 +14,7 @@ class NotCompleted extends Component {
     const { todos } = this.props;
     const rows = todos.map(
       todo =>
-        todo.status ? (
+        !todo.status ? (
           <tr key={todo.id}>
             <td>{todo.name}</td>
             <td>{todo.date}</td>

@@ -14,7 +14,7 @@ class Completed extends Component {
     const { todos } = this.props;
     const rows = todos.map(
       todo =>
-        !todo.status ? (
+        todo.status ? (
           <tr key={todo.id}>
             <td>{<del>{todo.name}</del>}</td>
             <td>{<del>{todo.date}</del>}</td>
