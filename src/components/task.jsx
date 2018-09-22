@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addTodo } from "../actions";
+import { addTodo, statusChange } from "../actions";
 //import Star from "./common/star";
 
 class Task extends Component {
   constructor(props) {
     super(props);
     console.log("inside constructor");
-    // this.getRows = this.getRows.bind(this);
   }
   componentWillReceiveProps() {
     console.log("component", this.props);
@@ -15,14 +14,23 @@ class Task extends Component {
 
   getRows() {
     const { todos } = this.props;
-    console.log(todos, ">>>");
     const rows =
       todos.length &&
       todos.map(todo => (
         <tr key={todo.id}>
-          <td>{todo.name}</td>
-          <td>{todo.date}</td>
-          <td>{todo.status}</td>
+          <td>{todo.status ? todo.name : <del>{todo.name}</del>}</td>
+          <td>{todo.status ? todo.date : <del>{todo.date}</del>}</td>
+          <td>
+            <button
+              onClick={e => {
+                e.preventDefault();
+                this.props.statusChange(todo.id);
+              }}
+              className="btn btn-primary m-2"
+            >
+              {todo.status ? "Incompleted" : "completed"}
+            </button>
+          </td>
         </tr>
       ));
     return rows;
@@ -70,7 +78,11 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    addTodo: text => dispatch(addTodo(text))
+    addTodo: text => dispatch(addTodo(text)),
+    statusChange: id => {
+      console.log(">>>>>>>>>>>>>>>>>", id);
+      dispatch(statusChange(id));
+    }
   };
 };
 export default connect(

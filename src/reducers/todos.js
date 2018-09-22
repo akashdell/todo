@@ -3,7 +3,6 @@ const initialState = [];
 const todos = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TODO":
-      console.log("action", action);
       return [
         ...state,
         {
@@ -13,6 +12,13 @@ const todos = (state = initialState, action) => {
           status: action.status
         }
       ];
+
+    case "SET_STATUS":
+      console.log("action", action);
+      return state.map(
+        todo =>
+          todo.id === action.id ? { ...todo, status: !todo.status } : todo
+      );
     default:
       return state;
   }

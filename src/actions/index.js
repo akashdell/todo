@@ -6,3 +6,8 @@ export const addTodo = text => ({
   status: "incomplete",
   text
 });
+
+export const statusChange = id => ({
+  type: "SET_STATUS",
+  id: id
+});
