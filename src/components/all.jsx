@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { addTodo, statusChange } from "../actions";
 //import Star from "./common/star";
 
-class Task extends Component {
+class All extends Component {
   constructor(props) {
     super(props);
     console.log("inside constructor");
@@ -14,25 +14,23 @@ class Task extends Component {
 
   getRows() {
     const { todos } = this.props;
-    const rows =
-      todos.length &&
-      todos.map(todo => (
-        <tr key={todo.id}>
-          <td>{todo.status ? todo.name : <del>{todo.name}</del>}</td>
-          <td>{todo.status ? todo.date : <del>{todo.date}</del>}</td>
-          <td>
-            <button
-              onClick={e => {
-                e.preventDefault();
-                this.props.statusChange(todo.id);
-              }}
-              className="btn btn-primary m-2"
-            >
-              {todo.status ? "Incompleted" : "completed"}
-            </button>
-          </td>
-        </tr>
-      ));
+    const rows = todos.map(todo => (
+      <tr key={todo.id}>
+        <td>{todo.status ? todo.name : <del>{todo.name}</del>}</td>
+        <td>{todo.status ? todo.date : <del>{todo.date}</del>}</td>
+        <td>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              this.props.statusChange(todo.id);
+            }}
+            className="btn btn-primary m-2"
+          >
+            {todo.status ? "Incompleted" : "completed"}
+          </button>
+        </td>
+      </tr>
+    ));
     return rows;
   }
 
@@ -88,4 +86,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Task);
+)(All);
