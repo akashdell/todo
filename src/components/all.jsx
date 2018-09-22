@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addTodo, statusChange } from "../actions";
+import { addTodo, statusChange, deleteTask } from "../actions";
 //import Star from "./common/star";
 
 class All extends Component {
@@ -27,6 +27,17 @@ class All extends Component {
             className="btn btn-primary m-2"
           >
             {todo.status ? "Incompleted" : "completed"}
+          </button>
+        </td>
+        <td>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              this.props.deleteTask(todo.id);
+            }}
+            className="btn btn-danger m-2"
+          >
+            Delete
           </button>
         </td>
       </tr>
@@ -80,6 +91,10 @@ const mapDispatchToProps = dispatch => {
     statusChange: id => {
       console.log(">>>>>>>>>>>>>>>>>", id);
       dispatch(statusChange(id));
+    },
+    deleteTask: id => {
+      console.log(">>>>>>>>>>>>>>>>>", id);
+      dispatch(deleteTask(id));
     }
   };
 };

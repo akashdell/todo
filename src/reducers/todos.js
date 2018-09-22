@@ -14,11 +14,14 @@ const todos = (state = initialState, action) => {
       ];
 
     case "SET_STATUS":
-      console.log("action", action);
       return state.map(
         todo =>
           todo.id === action.id ? { ...todo, status: !todo.status } : todo
       );
+
+    case "TASK_DELETE":
+      console.log("action", action);
+      return state.filter(todo => todo.id !== action.id);
     default:
       return state;
   }

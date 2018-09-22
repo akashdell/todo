@@ -11,3 +11,8 @@ export const statusChange = id => ({
   type: "SET_STATUS",
   id: id
 });
+
+export const deleteTask = id => ({
+  type: "TASK_DELETE",
+  id: id
+});
