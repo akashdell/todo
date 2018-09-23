@@ -16,19 +16,20 @@ class All extends Component {
     const { todos } = this.props;
     const rows = todos.map(todo => (
       <tr key={todo.id}>
-        <td>{!todo.status ? todo.name : <del>{todo.name}</del>}</td>
-        <td>{!todo.status ? todo.date : <del>{todo.date}</del>}</td>
         <td>
-          <button
+          {" "}
+          <input
+            type="checkbox"
+            aria-label="Checkbox for following text input"
             onClick={e => {
-              e.preventDefault();
               this.props.statusChange(todo.id);
             }}
-            className="btn btn-primary m-2"
-          >
-            {todo.status ? "Incompleted" : "completed"}
-          </button>
+            checked={todo.status}
+          />
         </td>
+        <td>{!todo.status ? todo.name : <del>{todo.name}</del>}</td>
+        <td>{!todo.status ? todo.date : <del>{todo.date}</del>}</td>
+        <td>{todo.status ? "completed" : "Incompleted"}</td>
       </tr>
     ));
     return rows;
@@ -57,6 +58,7 @@ class All extends Component {
         <table className="table">
           <thead>
             <tr>
+              <th />
               <th>Todo</th>
               <th>Time</th>
               <th>Status</th>
